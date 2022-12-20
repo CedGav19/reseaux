@@ -1,0 +1,3 @@
+port 1300 
+CreateSockets 3
+bytes envoyes:200

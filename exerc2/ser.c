@@ -41,6 +41,7 @@ int main(int argc,char *argv[])
 
 /*  requete en requeteCGRD*/
  struct RequeteCGRD UneRequete ;
+ struct VehiculeCGRD voiture ;
 
  memset(&sthis,0,sizeof(struct sockaddr_in)) ;
  memset(&sos,0,sizeof(struct sockaddr_in)) ; 
@@ -81,6 +82,13 @@ int main(int argc,char *argv[])
  strcat(UneRequete.Message," Client") ;
  */
  /* struct requete en requeteCGRD*/
+ RechercheCGRD("VehiculesCGRD" ,UneRequete.Reference ,&voiture) ;
+ UneRequete.Reference = voiture.Reference ;
+ strcpy(UneRequete.Constructeur,voiture.Constructeur);
+ strcpy(UneRequete.Modele,voiture.Modele);
+
+
+
  rc = SendDatagram(Desc,&UneRequete,sizeof(struct RequeteCGRD) ,&sor ) ;
  if ( rc == -1 )
     die("SendDatagram:") ;

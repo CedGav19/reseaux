@@ -68,6 +68,12 @@ int main(int argc, char *argv[])
   sos.sin_port = htons(PortServer) ;
 
  UneRequete.Type = Question ; 
+
+printf("avant l'envoie de la requete ! \n ");
+ AfficheRequeteCGRD(stdout, UneRequete );
+UneRequete.Reference = 2 ;
+
+
  /*
  strncpy(Requete.Message , "Avec une structure: Bonjour" , sizeof(Requete.Message)) ;
 */ 
@@ -86,9 +92,12 @@ int main(int argc, char *argv[])
   rc = ReceiveDatagram( Desc, &UneRequete,tm, &sor ) ;
  if ( rc == -1 )
     die("ReceiveDatagram") ;
- /*
+
  else
-   fprintf(stderr,"bytes recus:%d:%s\n",rc,Requete.Message ) ;
- */
+   fprintf(stderr,"bytes recus:%d:%d\n",rc,UneRequete.Type ) ;
+ 
+printf("apres la reception de la requete ! \n ");
+   AfficheRequeteCGRD(stdout, UneRequete );
+
  close(Desc) ;
 }
