@@ -69,8 +69,10 @@ int main(int argc, char *argv[])
 
  UneRequete.Type = Question ; 
 
+//affiche de la requiète avant envoie
 printf("avant l'envoie de la requete ! \n ");
- AfficheRequeteCGRD(stdout, UneRequete );
+AfficheRequeteCGRD(stdout, UneRequete );
+//on assigne 2 pour que la recherche soit effectué sur cette référence
 UneRequete.Reference = 2 ;
 
 
@@ -89,6 +91,8 @@ UneRequete.Reference = 2 ;
  memset(&UneRequete,0,sizeof(struct RequeteCGRD)) ;
  tm = sizeof(struct RequeteCGRD) ;
  
+
+ //on reçois les données de la recherche
   rc = ReceiveDatagram( Desc, &UneRequete,tm, &sor ) ;
  if ( rc == -1 )
     die("ReceiveDatagram") ;

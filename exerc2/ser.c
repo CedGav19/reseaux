@@ -81,6 +81,7 @@ int main(int argc,char *argv[])
  UneRequete.Type = Reponse ; 
  strcat(UneRequete.Message," Client") ;
  */
+ //on effectue la requète de recherche après l'avoir reçue
  /* struct requete en requeteCGRD*/
  RechercheCGRD("VehiculesCGRD" ,UneRequete.Reference ,&voiture) ;
  UneRequete.Reference = voiture.Reference ;
@@ -88,7 +89,7 @@ int main(int argc,char *argv[])
  strcpy(UneRequete.Modele,voiture.Modele);
 
 
-
+ //on renvoie le résultat de la requète
  rc = SendDatagram(Desc,&UneRequete,sizeof(struct RequeteCGRD) ,&sor ) ;
  if ( rc == -1 )
     die("SendDatagram:") ;
