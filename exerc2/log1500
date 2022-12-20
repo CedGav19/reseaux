@@ -1,0 +1,3 @@
+port 1500 
+CreateSockets 3
+Envoi de 200 bytes
