@@ -106,6 +106,7 @@ void AfficheEnteteVehiculeCGRD ()
  sprintf(Tampon,"%s","Constructeur") ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s","Modele") ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s","Quantite") ; MonPrintf(Tampon,6,strlen(Tampon)) ;
+sprintf(Tampon,"%s","Coueleur") ; MonPrintf(Tampon,20,strlen(Tampon)) ;
  printf("\n") ;
 }
 
@@ -116,6 +117,7 @@ void AfficheVehiculeCGRD (struct VehiculeCGRD    *UnRecord)
  sprintf(Tampon,"%s",UnRecord->Constructeur ) ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s",UnRecord->Modele ) ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%d",UnRecord->Quantite ) ; MonPrintf(Tampon,6,strlen(Tampon)) ;
+  sprintf(Tampon,"%s",UnRecord->couleur ) ; MonPrintf(Tampon,20,strlen(Tampon)) ;
  printf("\n") ;
 }
 
@@ -132,6 +134,8 @@ void SaiSieVehiculeCGRD (int Reference, struct VehiculeCGRD  *UnRecord )
  printf("Saisie Quantite :") ;
  fgets(Tampon,sizeof Tampon,stdin ) ;
  UnRecord -> Quantite = atoi(Tampon) ;
+ printf("Saisie Couleur :") ;
+ fgets(UnRecord->couleur ,sizeof UnRecord->couleur ,stdin ) ;
  
  DelNewLine(UnRecord->Constructeur) ;
  DelNewLine(UnRecord->Modele) ;
@@ -297,7 +301,7 @@ AProposServeurCGRD("V1" ,"GavageCedric","RomainDemonty");
              break ;
    case '4': 
   
-       printf("reference : ") ;  fgets(Tampon,sizeof Tampon ,stdin ) ;ref=atoi(Tampon);
+       printf("reference : ") ; scanf("%d",&ref);
       if ( RechercheCGRD("VehiculesCGRD" , ref, &UnRecord)==1)
       {
         AfficheEnteteVehiculeCGRD () ;
@@ -315,6 +319,3 @@ AProposServeurCGRD("V1" ,"GavageCedric","RomainDemonty");
   }
  }
 }
-
-
-

@@ -13,8 +13,7 @@ struct VehiculeCGRD {
 	 			char Constructeur[30] ;
    	 		char Modele[30] ;
 	 			int  Quantite ;
-	 			int couleur[20];
-	 
+	 			char couleur [20] ; 
       
 	} ;
 

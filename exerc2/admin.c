@@ -106,6 +106,7 @@ void AfficheEnteteVehiculeCGRD ()
  sprintf(Tampon,"%s","Constructeur") ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s","Modele") ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s","Quantite") ; MonPrintf(Tampon,6,strlen(Tampon)) ;
+ sprintf(Tampon,"%s","Couleur") ; MonPrintf(Tampon,20,strlen(Tampon)) ;
  printf("\n") ;
 }
 
@@ -116,6 +117,7 @@ void AfficheVehiculeCGRD (struct VehiculeCGRD    *UnRecord)
  sprintf(Tampon,"%s",UnRecord->Constructeur ) ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%s",UnRecord->Modele ) ;    MonPrintf(Tampon,30,strlen(Tampon)) ;
  sprintf(Tampon,"%d",UnRecord->Quantite ) ; MonPrintf(Tampon,6,strlen(Tampon)) ;
+ sprintf(Tampon,"%s",UnRecord->couleur ) ; MonPrintf(Tampon,20,strlen(Tampon)) ;
  printf("\n") ;
 }
 
@@ -132,6 +134,9 @@ void SaiSieVehiculeCGRD (int Reference, struct VehiculeCGRD  *UnRecord )
  printf("Saisie Quantite :") ;
  fgets(Tampon,sizeof Tampon,stdin ) ;
  UnRecord -> Quantite = atoi(Tampon) ;
+ printf("Saisie couleur :") ;
+ fgets(UnRecord->couleur ,sizeof UnRecord->couleur ,stdin ) ;
+ 
  
  DelNewLine(UnRecord->Constructeur) ;
  DelNewLine(UnRecord->Modele) ;
