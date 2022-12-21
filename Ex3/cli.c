@@ -67,65 +67,68 @@ int main(int argc, char *argv[])
   sos.sin_addr.s_addr= IpServer ;
   sos.sin_port = htons(PortServer) ;
 
+//ajout pour que la demande soit fait tant que on ne quitte pas
+do{
+
+   do {
+    printf("------------------\n") ;
+    printf("1) Demander une reference\n") ;
+    printf("3) Quitter\n") ;
+     printf("------------------\n") ;
+     fflush(stdin );
+     scanf ("%d",&UneRequete.Type ); 
+   }while (UneRequete.Type != 3 && UneRequete.Type != 1);
+
+   switch(UneRequete.Type)
+   {
+      case 1 : 
+               do {
+               printf(" reference: \n") ;
+                scanf ("%d",&UneRequete.Reference ); 
+               }while ( UneRequete.Reference<0);
+      break ; 
+      case 3 : exit(1);
+      break ;
+   }
 
 
-do {
- printf("------------------\n") ;
- printf("1) Demander une reference\n") ;
- printf("3) Quitter\n") ;
-  printf("------------------\n") ;
-  fflush(stdin );
-  scanf ("%d",&UneRequete.Type ); 
-}while (UneRequete.Type != 3 && UneRequete.Type != 1);
-
-switch(UneRequete.Type)
-{
-   case 1 : 
-            do {
-            printf(" reference: \n") ;
-             scanf ("%d",&UneRequete.Reference ); 
-            }while ( UneRequete.Reference<0);
-   break ; 
-   case 3 : exit(1);
-   break ;
-
-
-}
-
-
-//affiche de la requiète avant envoie
-printf("avant l'envoie de la requete ! \n ");
-AfficheRequeteCGRD(stdout, UneRequete );
-//on assigne 2 pour que la recherche soit effectué sur cette référence
-
-
-
- /*
- strncpy(Requete.Message , "Avec une structure: Bonjour" , sizeof(Requete.Message)) ;
-*/ 
-/* struct requete en requeteCGRD*/
- rc = SendDatagram(Desc,&UneRequete,sizeof(struct RequeteCGRD) ,&sos ) ;
-
- if ( rc == -1 )
-    die("SendDatagram") ;
- else
-   fprintf(stderr,"Envoi de %d bytes\n",rc ) ;
- 
- /* struct requete en requeteCGRD*/
- memset(&UneRequete,0,sizeof(struct RequeteCGRD)) ;
- tm = sizeof(struct RequeteCGRD) ;
- 
-
- //on reçois les données de la recherche
-  rc = ReceiveDatagram( Desc, &UneRequete,tm, &sor ) ;
- if ( rc == -1 )
-    die("ReceiveDatagram") ;
-
- else
-   fprintf(stderr,"bytes recus:%d:%d\n",rc,UneRequete.Type ) ;
- 
-printf("apres la reception de la requete ! \n ");
+   //affiche de la requiète avant envoie
+   printf("avant l'envoie de la requete ! \n ");
    AfficheRequeteCGRD(stdout, UneRequete );
+   //on assigne 2 pour que la recherche soit effectué sur cette référence
+
+
+
+    /*
+    strncpy(Requete.Message , "Avec une structure: Bonjour" , sizeof(Requete.Message)) ;
+   */ 
+   /* struct requete en requeteCGRD*/
+    rc = SendDatagram(Desc,&UneRequete,sizeof(struct RequeteCGRD) ,&sos ) ;
+
+    if ( rc == -1 )
+       die("SendDatagram") ;
+    else
+      fprintf(stderr,"Envoi de %d bytes\n",rc ) ;
+    
+    /* struct requete en requeteCGRD*/
+    memset(&UneRequete,0,sizeof(struct RequeteCGRD)) ;
+    tm = sizeof(struct RequeteCGRD) ;
+    
+
+    //on reçois les données de la recherche
+     rc = ReceiveDatagram( Desc, &UneRequete,tm, &sor ) ;
+    if ( rc == -1 )
+       die("ReceiveDatagram") ;
+
+    else
+      fprintf(stderr,"bytes recus:%d:%d\n",rc,UneRequete.Type ) ;
+    
+   printf("apres la reception de la requete ! \n ");
+      AfficheRequeteCGRD(stdout, UneRequete );
+
+      
+
+   }while(1);
 
  close(Desc) ;
 }
