@@ -125,9 +125,6 @@ do{
     
    printf("apres la reception de la requete ! \n ");
       AfficheRequeteCGRD(stdout, UneRequete );
-
-      
-
    }while(1);
 
  close(Desc) ;
