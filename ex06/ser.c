@@ -141,14 +141,15 @@ switch(UneRequete.Type)
       
    break ;
    case 2: 
-      printf("---------------------------date = %d\n",UneRequete.Date);
-      printf("---------------------------Acheteur = %s\n",UneRequete.NomClient);
-         if(testret=VerifDateCGRD(UneRequete.NomClient, UneRequete.Date))
+     /* printf("------------date = %d\n",UneRequete.Date);
+      printf("---------------Acheteur = %s\n",UneRequete.NomClient);*/
+
+         if(VerifDateCGRD(UneRequete.NomClient, UneRequete.Date)==1)
          {
             if(ReservationCGRD("VehiculesCGRD",UneRequete.Reference,UneRequete.Quantite)==1)
             {
                
-               if ((tmp=FacturationCGRD("FactureCGRD",UneRequete.NomClient, timespand,UneRequete.Reference,UneRequete.Quantite))!=-1)
+               if ((tmp=FacturationCGRD("FactureCGRD",UneRequete.NomClient, UneRequete.Date,UneRequete.Reference,UneRequete.Quantite))!=-1)
                {
                   RechercheCGRD("VehiculesCGRD" ,UneRequete.Reference ,&voiture); // remplis les ifnos sur la voiture 
                   strcpy(UneRequete.Constructeur,voiture.Constructeur);
@@ -166,10 +167,8 @@ switch(UneRequete.Type)
          }
          else 
          {
-            printf("DOUBLON ! ");
+            printf("DOUBLON ! \n");
          }
-
-         printf("--------test ret = %d &&&&&&&&\n" , testret);
    break ;
 };
  

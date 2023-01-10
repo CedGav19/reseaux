@@ -7,6 +7,7 @@
 ------------------------------------------------------------------*/
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "./udplib/udplib.h"
 #include "requeteCGRD.h"
 
@@ -152,6 +153,7 @@ do{
 
       break ; 
       case 2 : 
+               nbrequete=0 ;
                do {
 
                   c=getchar();// vider le buffer 
@@ -192,7 +194,7 @@ do{
                      else
                      {
                         fprintf(stderr,"Envoi de %d bytes  ");
-                        nbrequete++;
+                        
                      }
 
 
@@ -215,10 +217,10 @@ do{
                            goto redo ;
                         }
 
-                        nbrequete--;
+                        nbrequete++;
 
                         alarm(0);
-                        if ( nbrequete !=0 )
+                        if ( nbrequete !=1 )
                         {
                            printf(" ATTENTION doublon !!!!!\n") ;
                            
@@ -232,7 +234,15 @@ do{
 
                               fprintf(stdout, "--------[ Facture cree avec succes ]--------\n");
                               fprintf(stdout, "--------[ Achat reussi : Facture N° %d ]--------\n",reception.NumeroFacture);
-                              fprintf(stdout, "Client: %s   Constructeur: %s   Modele : %s  , Quantite: %d    \n",reception.NomClient,reception.Constructeur ,reception.Modele,reception.Quantite);
+                              fprintf(stdout, "Client: %s   Constructeur: %s   Modele : %s  , Quantite: %d    ",reception.NomClient,reception.Constructeur ,reception.Modele,reception.Quantite);
+                              time_t rawtime ;
+                               rawtime= reception.Date;
+                               struct tm *info ;
+                               info = gmtime(&rawtime);
+
+                               printf (" %2d: %2d\n", (info->tm_hour +1)%24, info->tm_min);
+                               
+                               printf("\n") ;
                            }
                            else
                            {
@@ -241,7 +251,7 @@ do{
 
                               sleep(5) ;
                           }
-                     }while(nbrequete !=0);
+                     }while(nbrequete !=1);
 
 
                break;

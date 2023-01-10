@@ -118,7 +118,7 @@ int FacturationCGRD(char NomFichier[80], char NomClient[80], time_t Date,int Qua
         facture.Reference = Reference;
 
         //écriture dans le fichier
-        fwrite(&facture,sizeof(facture), 1, fp);
+        fwrite(&facture,sizeof(struct FactureCGRD), 1, fp);
 
         //fermeture du fichier
         fclose(fp);
@@ -140,15 +140,15 @@ int VerifDateCGRD(char NomClient[80], int Date) {
         printf("Erreur lors de l'ouverture du fichier\n");
         return 0;
     }
-   
-fread(&UneFacture, sizeof(UneFacture), 1, fp);
+    
+        fread(&UneFacture, sizeof(struct FactureCGRD), 1, fp);
     while (!feof(fp)) {
         if (strcmp(UneFacture.Acheteur, NomClient) == 0 && UneFacture.DateFacturation == Date) {
             fflush(fp);
             fclose(fp);
             return 0;
         }
-        fread(&UneFacture, sizeof(UneFacture), 1, fp);
+        fread(&UneFacture, sizeof(struct FactureCGRD), 1, fp);
     }
     fflush(fp);
     fclose(fp);
